@@ -2,7 +2,7 @@
 
 ## Content
 
-The repository `stata-leam` provides Stata user-written commands for use with Stata by the Laboratori d'Estadística Aplicada i Modelització, Universitata Autònoma de Barcelona (UAB). Each command includes a help file and a dialog box.
+The repository `stata-leam` provides Stata user-written commands by the Laboratori d'Estadística Aplicada i Modelització, Universitat Autònoma de Barcelona (UAB). 
 
 | Command | Description |
 | --- | --- |
@@ -25,3 +25,35 @@ The repository `stata-leam` provides Stata user-written commands for use with St
 | `scct` | Stochastic Curtailment: Clinical trials |
 | `sta` | Association measures (frequency, person-time & paired data) |
 | `statmis` | Statistics of missing values |
+
+Each command includes a help file and a dialog box.
+
+These commands have been tested with Stata versions 12 to 19.
+
+### Install
+
+To install one command execute the syntax below, click on the name an follow the instructions.
+
+```stata
+net from "https://raw.githubusercontent.com/metodo-leam/stata-leam/master"
+```
+
+You may install using `net install`. For example, to install the `agree` command execute:
+
+```stata
+net install agree, from("https://raw.githubusercontent.com/metodo-leam/stata-leam/master") replace
+```
+
+To install other commands, replace `agree` with the name of the desired command.
+
+### Background
+
+These commands were developed as part of the studies _Metodología de la investagación: Diseño y Estadística en Ciencias de la Salud_, at the Laboratori d'Estadística Aplicada i Modelització (UAB).
+
+## Citation
+
+Please use the Vancouver reference suggested in the _Authors_ section of the `help` of each command.
+
+### Contact
+
+[metodo.campus@gmail.com](mailto:metodo.campus@gmail.com)
