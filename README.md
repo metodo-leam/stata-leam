@@ -1,8 +1,8 @@
-# stata-leam - Stata user-written commands by the Laboratori d'Estadística Aplicada i Modelització (UAB)
+# metodo-leam/stata - Stata user-written commands by the Laboratori d'Estadística Aplicada i Modelització (UAB)
 
 ## Content
 
-The repository `stata-leam` provides Stata user-written commands by the Laboratori d'Estadística Aplicada i Modelització, Universitat Autònoma de Barcelona (UAB). 
+The repository `stata` provides Stata user-written commands by the Laboratori d'Estadística Aplicada i Modelització, Universitat Autònoma de Barcelona (UAB). 
 
 | Command | Description |
 | --- | --- |
@@ -35,13 +35,13 @@ These commands have been tested with Stata versions 12 to 19.
 To install one command execute the syntax below, click on the name an follow the instructions.
 
 ```stata
-net from "https://raw.githubusercontent.com/metodo-leam/stata-leam/master"
+net from "https://raw.githubusercontent.com/metodo-leam/stata/master"
 ```
 
 You may install using `net install`. For example, to install the `agree` command execute:
 
 ```stata
-net install agree, from("https://raw.githubusercontent.com/metodo-leam/stata-leam/master") replace
+net install agree, from("https://raw.githubusercontent.com/metodo-leam/stata/master") replace
 ```
 
 To install other commands, replace `agree` with the name of the desired command.
