@@ -17,4 +17,4 @@ f dta/confound_linear.dta
 f dta/confound_logistic.dta
 f dta/confound_cox.dta
 f dta/confound_finegray.dta
-f dta/Ejemplo_confound.zip.dta
+f dta/Ejemplo_confound.zip
