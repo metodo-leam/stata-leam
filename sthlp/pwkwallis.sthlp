@@ -86,8 +86,7 @@ metodo.campus@gmail.com{p_end}
 Dom{c e'}nech JM. Kruskal-Wallis equality-of-populations rank test and non-parametric pairwise comparisons across{break}
 the levels of factor variables: User-written command pwkwallis for Stata  [computer program].{break}
 V1.1.1. Bellaterra: Universitat Aut{c o'g}noma de Barcelona; 2025.{break}
-Available executing from Stata: {break}
-net install pwkwallis, from("https://raw.githubusercontent.com/metodo-leam/stata/master"){p_end}
+Available from {browse "https://github.com/metodo-leam/stata"}{p_end}
 
 
 {marker references}{...}

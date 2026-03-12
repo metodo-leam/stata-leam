@@ -126,7 +126,7 @@ JM.Dom{c e'}nech{break}
 Programmer: R.Sesma{break}
 Laboratori d'Estad{c i'}stica Aplicada{break}
 Universitat Aut{c o'g}noma de Barcelona{break}
-metodo.campus@gmail.com
+metodo.campus@gmail.com{p_end}
 
 
 {title:Vancouver reference}
@@ -134,8 +134,7 @@ metodo.campus@gmail.com
 {p 4 6 2}
 Dom{c e'}nech JM. Data Check: User-written command dc for Stata [computer program].{break}
 V1.1.2. Bellaterra: Universitat Aut{c o'g}noma de Barcelona; 2025.{break}
-Available executing from Stata: {break}
-net install dc, from("https://raw.githubusercontent.com/metodo-leam/stata/master"){p_end}
+Available from {browse "https://github.com/metodo-leam/stata"}{p_end}
 
 
 {marker references}{...}

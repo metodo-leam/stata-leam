@@ -965,8 +965,7 @@ metodo.campus@gmail.com{p_end}
 Dom{c e'}nech JM. Sample Size and Power: Comparisons and estimations for independent proportions, means,{break}
 correlations, risks and rates: User-written command nsize for Stata [computer program].{break}
 V1.3.7. Bellaterra: Universitat Aut{c o'g}noma de Barcelona; 2022.{break}
-Available executing from Stata: {break}
-net install nsize, from("https://raw.githubusercontent.com/metodo-leam/stata/master"){p_end}
+Available from {browse "https://github.com/metodo-leam/stata"}{p_end}
 
 
 {marker references}{...}

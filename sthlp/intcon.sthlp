@@ -100,8 +100,7 @@ metodo.campus@gmail.com{p_end}
 {p 4 6 2}
 Dom{c e'}nech JM, Navarro JB. Internal Consistency: User-written command intcon for Stata [computer program].{break}
 V1.0.3. Bellaterra: Universitat Aut{c o'g}noma de Barcelona; 2022.{break}
-Available executing from Stata: {break}
-net install intcon, from("https://raw.githubusercontent.com/metodo-leam/stata/master"){p_end}
+Available from {browse "https://github.com/metodo-leam/stata"}{p_end}
 
 
 {marker references}{...}

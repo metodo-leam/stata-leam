@@ -187,8 +187,7 @@ metodo.campus@gmail.com{p_end}
 {p 4 6 2}
 Dom{c e'}nech JM. Weighted kappa: User-written command cohenkap for Stata [computer program].{break}
 V1.1.8. Bellaterra: Universitat Aut{c o'g}noma de Barcelona; 2025.{break}
-Available executing from Stata: {break}
-net install cohenkap, from("https://raw.githubusercontent.com/metodo-leam/stata/master"){p_end}
+Available from {browse "https://github.com/metodo-leam/stata"}{p_end}
 
 
 {marker references}{...}

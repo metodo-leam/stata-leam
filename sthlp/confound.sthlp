@@ -156,8 +156,7 @@ metodo.campus@gmail.com{p_end}
 Dom{c e'}nech JM, Navarro JB. Find the best subset for Linear, Logistic and Cox Regression:{break}
 User-written command confound for Stata [computer program].{break}
 V1.2.1. Bellaterra: Universitat Aut{c o'g}noma de Barcelona; 2024.{break}
-Available executing from Stata: {break}
-net install confound, from("https://raw.githubusercontent.com/metodo-leam/stata/master"){p_end}
+Available from {browse "https://github.com/metodo-leam/stata"}{p_end}
 
 
 {marker references}{...}

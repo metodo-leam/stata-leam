@@ -125,8 +125,7 @@ metodo.campus@gmail.com{p_end}
 {p 4 6 2}
 Dom{c e'}nech JM. ROC Analysis & Optimal Cutoff Point: User-written command dtroc for Stata [computer program].{break}
 V1.1.5. Bellaterra: Universitat Aut{c o'g}noma de Barcelona; 2022.{break}
-Available executing from Stata: {break}
-net install dtroc, from("https://raw.githubusercontent.com/metodo-leam/stata/master"){p_end}
+Available from {browse "https://github.com/metodo-leam/stata"}{p_end}
 
 
 {marker references}{...}

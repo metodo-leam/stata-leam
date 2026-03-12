@@ -62,8 +62,7 @@ metodo.campus@gmail.com{p_end}
 Dom{c e'}nech JM. Association Measures (frequency, person-time & paired data):{break}
 User-written command sta for Stata [computer program]{break}
 V1.2.4. Bellaterra: Universitat Aut{c o'g}noma de Barcelona; 2025.{break}
-Available executing from Stata: {break}
-net install sta, from("https://raw.githubusercontent.com/metodo-leam/stata/master"){p_end}
+Available from {browse "https://github.com/metodo-leam/stata"}{p_end}
 
 
 {marker references}{...}

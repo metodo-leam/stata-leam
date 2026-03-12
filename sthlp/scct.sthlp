@@ -77,8 +77,7 @@ metodo.campus@gmail.com{p_end}
 {p 4 6 2}
 Dom{c e'}nech JM. Stochastic Curtailment, Clinical trials: User-written command scct for Stata [computer program].{break}
 V1.0.7. Bellaterra: Universitat Aut{c o'g}noma de Barcelona; 2022.{break}
-Available executing from Stata: {break}
-net install scct, from("https://raw.githubusercontent.com/metodo-leam/stata/master"){p_end}
+Available from {browse "https://github.com/metodo-leam/stata"}{p_end}
 
 
 {marker references}{...}
