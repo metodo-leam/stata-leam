@@ -1,5 +1,5 @@
 {smcl}
-{* *! version 1.1.7 15dec2022}{...}
+{* *! version 1.1.8 12mar2026}{...}
 {viewerdialog statmis "dialog statmis"}{...}
 {viewerjumpto "Syntax" "statmis##syntax"}{...}
 {viewerjumpto "Description" "statmis##description"}{...}
@@ -63,7 +63,7 @@ This command uses the {help summarize} and {help tabulate} Stata commands.
 {title:Examples}
 {p 4 4}{stata "use https://raw.githubusercontent.com/metodo-leam/stata/master/dta/Salud.dta":. use https://raw.githubusercontent.com/metodo-leam/stata/master/dta/Salud.dta}{p_end}
 {p 4 4}{cmd:. statmis}{p_end}
-{p 4 4}{cmd:. statmis Sexo HabitFum PTc IMC Edad HTA}{p_end}
+{p 4 4}{cmd:. statmis SexoFem HabitFum PTc IMC Edad HTA}{p_end}
 {p 4 4}{cmd:. statmis HabitFum EdadF Tab CIE, noreport generate(miss)}{p_end}
 {p 4 4}{cmd:. statmis PAS PAD H1 - NivObs, nogenerate excluded}{p_end}
 
@@ -88,7 +88,7 @@ Unless {cmd:noreport} option is especified, the command stores the following sca
 {title:Version}
 
 {p 4}
-Version 1.1.7 {hline 2} 15 December 2022
+Version 1.1.8 {hline 2} 12 March 2026
 
 
 {marker authors}{...}
@@ -106,5 +106,5 @@ metodo.campus@gmail.com{p_end}
 
 {p 4 6 2}
 Dom{c e'}nech JM. Statistics of missing values: User-written command statmis for Stata [computer program].{break}
-V1.1.7. Bellaterra: Universitat Aut{c o'g}noma de Barcelona; 2022.{break}
+V1.1.8. Bellaterra: Universitat Aut{c o'g}noma de Barcelona; 2026.{break}
 Available from {browse "https://github.com/metodo-leam/stata"}{p_end}

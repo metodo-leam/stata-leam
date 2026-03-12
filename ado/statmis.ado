@@ -1,4 +1,4 @@
-*! version 1.1.7 15dec2022 JM. Domenech, R. Sesma
+*! version 1.1.8 12mar2026 JM. Domenech, R. Sesma
 
 /*
 statmis: missing statistics

@@ -1,5 +1,5 @@
 {smcl}
-{* *! version 1.0.9 15dec2022}{...}
+{* *! version 1.1.0 12mar2026}{...}
 {viewerdialog dcreport "dialog dcreport"}{...}
 {vieweralsosee "dc" "help dc"}{...}
 {viewerjumpto "Syntax" "dcreport##syntax"}{...}
@@ -53,16 +53,24 @@ Execute {cmd: net install dcreport, from("https://raw.githubusercontent.com/meto
 
 {marker examples}{...}
 {title:Examples}
-{p 4 4}{cmd:. dcreport, id(Caso)}{p_end}
-{p 4 4}{cmd:. dcreport _Er_Talla _Er_Peso _Er_H1 _Er_H2 _Er_H3, id(Caso) idnum}{p_end}
-{p 4 4}{cmd:. dcreport _Er_Talla - _Er_H3, id(Caso)}{p_end}
+{it:Set data}
+{p 4 4}{stata "use https://raw.githubusercontent.com/metodo-leam/stata/master/dta/Salud0.dta":. use https://raw.githubusercontent.com/metodo-leam/stata/master/dta/Salud0.dta}{p_end}
+{p 4 4}{cmd:. generate _ObsNum = _n}{p_end}
+{it:Check data with dc}
+{p 4 4}{cmd:. dc Talla, vl(150/200) id(Id)}{p_end}
+{p 4 4}{cmd:. dc Peso, vl(45/120) nd(1) id(Id)}{p_end}
+{p 4 4}{cmd:. dc H1 H2 H3, vl(0 1 2) id(Id)}{p_end}
+
+{p 4 4}{cmd:. dcreport, id(Id)}{p_end}
+{p 4 4}{cmd:. dcreport _Er_Talla _Er_Peso _Er_H1 _Er_H2 _Er_H3, id(Id) idnum}{p_end}
+{p 4 4}{cmd:. dcreport _Er_Talla - _Er_H3, id(Id)}{p_end}
 
 
 {marker version}{...}
 {title:Version}
 
 {p 4}
-Version 1.0.9 {hline 2} 15 December 2022
+Version 1.1.0 {hline 2} 12 March 2026
 
 
 {marker authors}{...}
@@ -80,7 +88,7 @@ metodo.campus@gmail.com{p_end}
 
 {p 4 6 2}
 Dom{c e'}nech JM. Incidence Report: User-written command dcreport for Stata [computer program].{break}
-V1.0.9. Bellaterra: Universitat Aut{c o'g}noma de Barcelona; 2022.{break}
+V1.1.0. Bellaterra: Universitat Aut{c o'g}noma de Barcelona; 2026.{break}
 Available from {browse "https://github.com/metodo-leam/stata"}{p_end}
 
 

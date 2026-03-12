@@ -1,5 +1,5 @@
 {smcl}
-{* *! version 1.3.6 26jun2025}{...}
+{* *! version 1.3.7 12mar2026}{...}
 {viewerdialog allsets "dialog allsets"}{...}
 {vieweralsosee "[R] regress" "help regress"}{...}
 {vieweralsosee "[R] logit" "help logit"}{...}
@@ -166,7 +166,7 @@ Competing-risk regression
 {title:Version}
 
 {p 4}
-Version 1.3.6 {hline 2} 26 June 2025
+Version 1.3.7 {hline 2} 12 March 2026
 
 
 {marker authors}{...}
@@ -183,9 +183,10 @@ metodo.campus@gmail.com{p_end}
 {title:Vancouver reference}
 
 {p 4 6 2}
-Dom{c e'}nech JM, Navarro JB. Find the best subset for Linear, Logistic, Cox and Competing-risks Regression: User-written 
-command allsets for Stata [computer program].{break}
-V1.3.6. Bellaterra: Universitat Aut{c o'g}noma de Barcelona; 2022{break}
+Dom{c e'}nech JM, Navarro JB. Find the best subset for Linear, Logistic, 
+Cox and Competing-risks Regression:{break} 
+User-written command allsets for Stata [computer program].{break}
+V1.3.7. Bellaterra: Universitat Aut{c o'g}noma de Barcelona; 2026{break}
 Available from {browse "https://github.com/metodo-leam/stata"}{p_end}
 
 

@@ -1,5 +1,5 @@
 {smcl}
-{* *! version 1.2.1 09dec2024}{...}
+{* *! version 1.2.2 12mar2026}{...}
 {viewerdialog confound "dialog confound"}{...}
 {vieweralsosee "[R] regress" "help regress"}{...}
 {vieweralsosee "[R] logit" "help logit"}{...}
@@ -136,7 +136,7 @@ Competing-risk regression
 {title:Version}
 
 {p 4}
-Version 1.2.1 {hline 2} 09 December 2024
+Version 1.2.2 {hline 2} 12 March 2026
 
 
 {marker authors}{...}
@@ -153,9 +153,10 @@ metodo.campus@gmail.com{p_end}
 {title:Vancouver reference}
 
 {p 4 6 2}
-Dom{c e'}nech JM, Navarro JB. Find the best subset for Linear, Logistic and Cox Regression:{break}
+Dom{c e'}nech JM, Navarro JB. Modelling confounding in Linear, Logistic, 
+Cox and Competing-risk Regression:{break}
 User-written command confound for Stata [computer program].{break}
-V1.2.1. Bellaterra: Universitat Aut{c o'g}noma de Barcelona; 2024.{break}
+V1.2.2. Bellaterra: Universitat Aut{c o'g}noma de Barcelona; 2026.{break}
 Available from {browse "https://github.com/metodo-leam/stata"}{p_end}
 
 

@@ -1,5 +1,5 @@
 {smcl}
-{* *! version 1.1.2 28oct2025}{...}
+{* *! version 1.1.3 12mar2026}{...}
 {viewerdialog dc "dialog dc"}{...}
 {vieweralsosee "dcreport" "help dcreport"}{...}
 {viewerjumpto "Syntax" "dc##syntax"}{...}
@@ -100,13 +100,17 @@ and {help icd10pcs} Stata commands.
 
 {marker examples}{...}
 {title:Examples}
+{it:Set data}
+{p 4 4}{stata "use https://raw.githubusercontent.com/metodo-leam/stata/master/dta/Salud0.dta":. use https://raw.githubusercontent.com/metodo-leam/stata/master/dta/Salud0.dta}{p_end}
+{p 4 4}{cmd:. generate _ObsNum = _n}{p_end}
+
 {p 4 4}{cmd:. dc Id, isid}{p_end}
 {p 4 4}{cmd:. dc Peso, vl(45/120) nd(1) id(Id)}{p_end}
 {p 4 4}{cmd:. dc H1 H2 H3, vl(0 1 2) id(Id)}{p_end}
 {p 4 4}{cmd:. dc Sex, vl(F M) id(Id)}{p_end}
 {p 4 4}{cmd:. dc CP, table(C:\...\CP.dta) vk(cp) id(Id)}{p_end}
 {p 4 4}{cmd:. dc CIE10, icd(10cm) id(Id)}{p_end}
-{p 4 4}{cmd:. dc FR, di(01/04/2006) df(15/04/2006) nomissing id(Id)}{p_end}
+{p 4 4}{cmd:. dc FR, di(01/04/2018) df(15/04/2018) nomissing id(Id)}{p_end}
 {p 4 4}{cmd:. dc FN, dd(FR-FN) ddl(18) ddu(90) ddunit(years) id(Id)}{p_end}
 {p 4 4}{cmd:. dc PAS, vl(100/200) id(Id) code1(10) expr1(PAD>=PAS & PAD<.)}{p_end}
 
@@ -115,7 +119,7 @@ and {help icd10pcs} Stata commands.
 {title:Version}
 
 {p 4}
-Version 1.1.2 {hline 2} 28 October 2025
+Version 1.1.3 {hline 2} 12 March 2026
 
 
 {marker authors}{...}
@@ -133,7 +137,7 @@ metodo.campus@gmail.com{p_end}
 
 {p 4 6 2}
 Dom{c e'}nech JM. Data Check: User-written command dc for Stata [computer program].{break}
-V1.1.2. Bellaterra: Universitat Aut{c o'g}noma de Barcelona; 2025.{break}
+V1.1.3. Bellaterra: Universitat Aut{c o'g}noma de Barcelona; 2026.{break}
 Available from {browse "https://github.com/metodo-leam/stata"}{p_end}
 
 
