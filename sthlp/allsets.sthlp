@@ -125,7 +125,7 @@ added variable.
 You can click {dialog allsets:here} to pop up a {dialog allsets:dialog} or type {inp: db allsets}.
 
 {p 4 4}
-Execute {cmd: net install agree, from("https://raw.githubusercontent.com/metodo-leam/stata-leam/master/")} for install.
+Execute {cmd: net install agree, from("https://raw.githubusercontent.com/metodo-leam/stata/master")} for install.
 
 {p 4 4}
 This command uses the {help regress}, {help logit}, {help logistic estat gof}, {help lroc}, {help rocreg}, {help stcox}, {help stcrreg}, 
@@ -138,27 +138,27 @@ user defined program.
 {title:Examples}
 
 Linear regression
-{p 4 4}{stata "use https://raw.githubusercontent.com/metodo-leam/stata-leam/master/dta/allsets_linear.dta":. use https://raw.githubusercontent.com/metodo-leam/stata-leam/master/dta//allsets_linear.dta}{p_end}
+{p 4 4}{stata "use https://raw.githubusercontent.com/metodo-leam/stata/master/dta/allsets_linear.dta":. use https://raw.githubusercontent.com/metodo-leam/stata/master/dta/allsets_linear.dta}{p_end}
 {p 4 4}{cmd:. allsets Y X1 X2 B i.C, linear}{p_end}
 {p 4 4}{cmd:. allsets Y X1 X2 B i.C, linear fixed(X1)}{p_end}
 {p 4 4}{cmd:. allsets Y X1 X2 B i.C, linear maxvar(1)}{p_end}
 {p 4 4}{cmd:. allsets Y X1 X2 B i.C c.X1#c.X2 c.X1#c.B, linear using(results_linear.dta)}{p_end}
 
 Logistic regression
-{p 4 4}{stata "use https://raw.githubusercontent.com/metodo-leam/stata-leam/master/dta/allsets_logistic.dta":. use https://raw.githubusercontent.com/metodo-leam/stata-leam/master/dta/allsets_logistic.dta}{p_end}
+{p 4 4}{stata "use https://raw.githubusercontent.com/metodo-leam/stata/master/dta/allsets_logistic.dta":. use https://raw.githubusercontent.com/metodo-leam/stata/master/dta/allsets_logistic.dta}{p_end}
 {p 4 4}{cmd:. allsets Y X1 X2 X3 i.C, logistic using(results_log.dta) noreplace}{p_end}
 
 Cox regression
-{p 4 4}{stata "use https://raw.githubusercontent.com/metodo-leam/stata-leam/master/dta/allsets_cox.dta":. use https://raw.githubusercontent.com/metodo-leam/stata-leam/master/dta/allsets_cox.dta}{p_end}
+{p 4 4}{stata "use https://raw.githubusercontent.com/metodo-leam/stata/master/dta/allsets_cox.dta":. use https://raw.githubusercontent.com/metodo-leam/stata/master/dta/allsets_cox.dta}{p_end}
 {p 4 4}{cmd:. stset TR, failure(Estado==1)}{p_end}
 {p 4 4}{cmd:. allsets X2 X3 i.C, cox using(results_cox.dta)}{p_end}
 {it:Time dependent covariates}
-{p 4 4}{stata "use https://raw.githubusercontent.com/metodo-leam/stata-leam/master/dta/allsets_cox_vdt.dta":. use https://raw.githubusercontent.com/metodo-leam/stata-leam/master/dta/allsets_cox_vdt.dta}{p_end}
+{p 4 4}{stata "use https://raw.githubusercontent.com/metodo-leam/stata/master/dta/allsets_cox_vdt.dta":. use https://raw.githubusercontent.com/metodo-leam/stata/master/dta/allsets_cox_vdt.dta}{p_end}
 {p 4 4}{cmd:. stset Stop, id(Caso) failure(Estado==1) time0(Start)}{p_end}
 {p 4 4}{cmd:. allsets X1 X2 X3 i.C c.X1#c.X2, cox}{p_end}
 
 Competing-risk regression
-{p 4 4}{stata "use https://raw.githubusercontent.com/metodo-leam/stata-leam/master/dta/allsets_finegray.dta":. use https://raw.githubusercontent.com/metodo-leam/stata-leam/master/dta/allsets_finegray.dta}{p_end}
+{p 4 4}{stata "use https://raw.githubusercontent.com/metodo-leam/stata/master/dta/allsets_finegray.dta":. use https://raw.githubusercontent.com/metodo-leam/stata/master/dta/allsets_finegray.dta}{p_end}
 {p 4 4}{cmd:. stset TSm, failure(Status==1)}{p_end}
 {p 4 4}{cmd:. allsets X1 X2 i.C, finegray compete(Status==2)}{p_end}
 
@@ -187,7 +187,7 @@ Dom{c e'}nech JM, Navarro JB. Find the best subset for Linear, Logistic, Cox and
 command allsets for Stata [computer program].{break}
 V1.3.6. Bellaterra: Universitat Aut{c o'g}noma de Barcelona; 2022{break}
 Available executing from Stata: {break}
-net install allsets, from("https://raw.githubusercontent.com/metodo-leam/stata-leam/master/"){p_end}
+net install allsets, from("https:https://raw.githubusercontent.com/metodo-leam/stata/master"){p_end}
 
 
 {marker references}{...}

@@ -1,0 +1,32 @@
+v 3
+d sta.  Association measures (frequency, person-time & paired data)
+d After installation, see help sta
+d 
+d (c)JM. Domenech
+d Programmer: R. Sesma
+d Laboratori d'Estadística Aplicada i Modelització, Universitat Autònoma de Barcelona
+d 
+d Distribution-Date: 15sep2025
+d Version 1.2.4 (15sep2025)
+d 
+d E-mail: metodo.campus@gmail.com
+f ado/sta.ado
+f ado/stai.ado
+f ado/sta__utils.ado
+f ado/sta__freq.ado
+f ado/sta__time.ado
+f ado/sta__pair.ado
+f sthlp/sta.sthlp
+f sthlp/stai.sthlp
+f sthlp/sta_freq.sthlp
+f sthlp/sta_pt.sthlp
+f sthlp/sta_paired.sthlp
+f dlg/sta.dlg
+f dlg/stai.dlg
+f dta/ObesArt.dta
+f dta/SmokePreterm.dta
+f dta/TreatHeal.dta
+f dta/SmokeCancer.dta
+f dta/ContrCancer.dta
+f dta/BladderSmoking.dta
+f dta/ParacetAspirin.dta

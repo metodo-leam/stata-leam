@@ -1,0 +1,117 @@
+/*
+  dtroc.dlg
+
+*! VERSION 1.1.5  15dec2022
+
+*/
+
+VERSION 12.0
+
+INCLUDE _std_msmall
+DEFINE _dlght 270
+INCLUDE header
+HELP hlp1, view("help dtroc")
+RESET res1
+
+DEFINE _txwd 230
+DEFINE _fwd 340
+DEFINE _wd 370
+DEFINE _x _lft
+DEFINE _y 240
+DEFINE _cx 100
+
+**# DIALOG main
+DIALOG main, label("dtroc - ROC Analysis & Optimal Cutoff Point") tabtitle("Main")
+BEGIN
+	TEXT  		tx_ref 	_lft   _top 	_iwd  	., label("Reference variable:")
+	VARNAME		v_ref	_lft   _ss		_vnwd  	., label("Reference variable")
+
+	TEXT  		tx_clas _lft2	_top 	_iwd  	., label("Classification variable:")
+	VARNAME		v_clas	@    	_ss		_vnwd  	., label("Classification variable")
+
+	GROUPBOX	gb_st	_lft   _xls		_wd    50, label("Study type")
+	RADIO    	rb_cs   _ilft  _ss      _iwd	., first label("Cross-Sectional") option(st(cs))
+	RADIO    	rb_cc   _lft2   @       _iwd	., last label("Case-Control") option(st(cc))
+	
+	GROUPBOX	gb_nst	_lft  	200		_wd    60, label("Name of the study")
+	EDIT		ed_nst	_ilft   _ms	 	_fwd	., option(nst)
+END
+
+
+INCLUDE ifin
+
+**# DIALOG opt
+DIALOG opt, tabtitle("Options")
+BEGIN
+	EDIT		ed_ic		_lft  	_top    _spwd	., numonly default(1) option(ic)
+	TEXT  		tx_ic 		_spsep	@ 		_txwd  	., label("Code of illness group")
+
+	CHECKBOX   	cb_noinc	_lft   _ms     	_wd		., label("Illness decreases classification variable") option(noinc)
+	
+	EDIT		ed_prev		_lft    _ms    	_spwd	., numonly label("Prevalence of illness in the population") option(prev)
+	TEXT  		tx_prev		_spsep  @ 		_txwd  	., label("Prevalence of illness in the population (%)")
+	TEXT  		tx_note		@   	_ss 	_txwd  	., label("(sample prevalence is used by default)")
+	
+	EDIT		ed_cost		_lft    _ms    	_spwd	., numonly default(1) option(cost)
+	TEXT  		tx_cost		_spsep  @ 		_txwd  	., label("Ratio false negative/false positive cost")
+	
+	
+	CHECKBOX   	cb_detail  	_lft   _ls     	_wd		70, label("Show details on Se/Sp for each cutpoint and save results") /*
+					*/									onclickon(program activate) onclickoff(program deactivate) /*
+					*/									option(detail) groupbox
+	FILE		fl_using	_ilft  _ss		_fwd	., label("Browse...") default("dtroc_cutoff.dta")	/*
+					*/									dialogtitle("Save dtroc Cut-off Table to Stata Data File") /*
+					*/									filter("Stata Data (*.dta)|*.dta") save option(using)					
+	CHECKBOX	cb_noreplace _ilft	_ss		_fwd	., label("Do not replace dataset if it already exists") option(noreplace)
+	
+	CHECKBOX   	cb_graph   	_lft   	_xls     _wd		., label("Graph sensitivity and specificity depending on each cutpoint") option(graph)
+	
+	INCLUDE _sp_level
+END
+
+**# PROGRAM activate
+PROGRAM activate
+BEGIN
+	call opt.fl_using.enable
+	call opt.cb_noreplace.enable
+END
+
+**# PROGRAM deactivate
+PROGRAM deactivate
+BEGIN
+	call opt.fl_using.disable
+	call opt.cb_noreplace.disable
+END
+
+
+**# PROGRAM command
+PROGRAM command
+BEGIN
+	require main.v_ref main.v_clas
+	
+	put "dtroc "
+	put main.v_ref " " main.v_clas
+	put " " /program ifin_output
+	
+	beginoptions
+		option radio(main rb_cs rb_cc)
+
+		optionarg /hidedefault opt.ed_ic
+		
+		option opt.cb_noinc
+		
+		optionarg opt.ed_prev
+
+		optionarg /hidedefault opt.ed_cost
+
+		option opt.cb_detail
+		optionarg /hidedefault opt.fl_using
+		option opt.cb_noreplace
+		
+		option opt.cb_graph
+		
+		INCLUDE _level_opt_pr
+		
+		optionarg main.ed_nst
+	endoptions
+END

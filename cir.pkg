@@ -1,0 +1,19 @@
+v 3
+d cir.  Confidence Intervals for Pearson and Spearman Correlation
+d After installation, see help cir
+d 
+d (c)JM. Domenech
+d Programmer: R. Sesma
+d Laboratori d'Estadística Aplicada i Modelització, Universitat Autònoma de Barcelona
+d 
+d Distribution-Date: 15dec2022
+d Version 1.1.3 (15dec2022)
+d 
+d E-mail: metodo.campus@gmail.com
+f ado/cir.ado
+f ado/ciri.ado
+f sthlp/cir.sthlp
+f sthlp/ciri.sthlp
+f dlg/cir.dlg
+f dlg/ciri.dlg
+f dta/CreaHemo.dta

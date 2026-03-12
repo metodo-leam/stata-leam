@@ -1,0 +1,20 @@
+v 3
+d confound.  Modelling confounding in Linear, Logistic, Cox proportional hazards and Competing-risk (Fine-Gray) regression
+d After installation, see help confound
+d 
+d (c)JM. Domenech, JB. Navarro
+d Programmer: R. Sesma
+d Laboratori d'Estadística Aplicada i Modelització, Universitat Autònoma de Barcelona
+d 
+d Distribution-Date: 09dec2024
+d Version 1.2.1 (09dec2024)
+d 
+d E-mail: metodo.campus@gmail.com
+f ado/confound.ado
+f sthlp/confound.sthlp
+f dlg/confound.dlg
+f dta/confound_linear.dta
+f dta/confound_logistic.dta
+f dta/confound_cox.dta
+f dta/confound_finegray.dta
+f dta/Ejemplo_confound.zip.dta

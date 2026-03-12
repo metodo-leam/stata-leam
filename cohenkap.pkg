@@ -1,0 +1,20 @@
+v 3
+d cohenkap.  Kappa & Weighted kappa
+d After installation, see help cohenkap
+d 
+d (c)JM. Domenech
+d Programmer: R. Sesma
+d Laboratori d'Estadística Aplicada i Modelització, Universitat Autònoma de Barcelona
+d 
+d Distribution-Date: 15sep2025
+d Version 1.1.8 (15sep2025)
+d 
+d E-mail: metodo.campus@gmail.com
+f ado/cohenkap.ado
+f ado/cohenkapi.ado
+f ado/cohenkapi__dlg.ado
+f sthlp/cohenkap.sthlp
+f sthlp/cohenkapi.sthlp
+f dlg/cohenkap.dlg
+f dlg/cohenkapi.dlg
+f dta/kappa_data.dta

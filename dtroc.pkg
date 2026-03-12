@@ -1,16 +1,16 @@
 v 3
-d agree.  Agreement: Bland-Altman & Passing-Bablok methods
-d After installation, see help agree
+d dtroc.  ROC analysis & optimal cutoff point
+d After installation, see help dtroc
 d 
 d (c)JM. Domenech
 d Programmer: R. Sesma
 d Laboratori d'Estadística Aplicada i Modelització, Universitat Autònoma de Barcelona
 d 
 d Distribution-Date: 15dec2022
-d Version 1.2.4 (15dec2022)
+d Version 1.1.5 (15dec2022)
 d 
 d E-mail: metodo.campus@gmail.com
-f ado/agree.ado
-f sthlp/agree.sthlp
-f dlg/agree.dlg
-f dta/agree_data.dta
+f ado/dtroc.ado
+f sthlp/dtroc.sthlp
+f dlg/dtroc.dlg
+f dta/GlucoseDiabetes.dta

@@ -1,16 +1,15 @@
 v 3
-d agree.  Agreement: Bland-Altman & Passing-Bablok methods
-d After installation, see help agree
+d scct.  Stochastic Curtailment: Clinical trials
+d After installation, see help scct
 d 
 d (c)JM. Domenech
 d Programmer: R. Sesma
 d Laboratori d'Estadística Aplicada i Modelització, Universitat Autònoma de Barcelona
 d 
 d Distribution-Date: 15dec2022
-d Version 1.2.4 (15dec2022)
+d Version 1.0.7 (15dec2022)
 d 
 d E-mail: metodo.campus@gmail.com
-f ado/agree.ado
-f sthlp/agree.sthlp
-f dlg/agree.dlg
-f dta/agree_data.dta
+f ado/scct.ado
+f sthlp/scct.sthlp
+f dlg/scct.dlg

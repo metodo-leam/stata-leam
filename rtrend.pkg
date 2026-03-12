@@ -1,0 +1,23 @@
+v 3
+d rtrend.  Trend test (2xk or kx2 table) for frequency and person-time data
+d After installation, see help rtrend
+d 
+d (c)JM. Domenech
+d Programmer: R. Sesma
+d Laboratori d'Estadística Aplicada i Modelització, Universitat Autònoma de Barcelona
+d 
+d Distribution-Date: 15dec2022
+d Version 1.3.4 (15dec2022)
+d 
+d E-mail: metodo.campus@gmail.com
+f ado/rtrend.ado
+f ado/rtrendi.ado
+f ado/rtrend__utils.ado
+f sthlp/rtrend.sthlp
+f sthlp/rtrendi.sthlp
+f dlg/rtrend.dlg
+f dlg/rtrendi.dlg
+f dta/SmokeApgar.dta
+f dta/SmokeApgarAge.dta
+f dta/SmokeBladder.dta
+f dta/ArsenicRespiratoryYear.dta

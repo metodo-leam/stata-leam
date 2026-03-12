@@ -58,7 +58,7 @@ critical values obtained from the {it:Kolmogorov-Smirnov} test: 1.94947 (alpha=0
 You can click {dialog agree:here} to pop up a {dialog agree:dialog} or type {inp: db agree}.
 
 {p 4 4}
-Execute {cmd: net install agree, from("https://raw.githubusercontent.com/metodo-leam/stata-leam/master/")} for install.
+Execute {cmd: net install agree, from("https://raw.githubusercontent.com/metodo-leam/stata/master")} for install.
 
 {p 4 4}
 This command uses the {help tabstat}, {help summarize}, {help swilk}, {help sktest} and {help spearman} Stata commands.
@@ -67,7 +67,7 @@ This command uses the {help tabstat}, {help summarize}, {help swilk}, {help skte
 {marker examples}{...}
 {title:Examples}
 
-{p 4 4}{stata "use https://raw.githubusercontent.com/metodo-leam/stata-leam/master/dta/agree_data.dta":. use agree_data}{p_end}
+{p 4 4}{stata "use https://raw.githubusercontent.com/metodo-leam/stata/master/dta/agree_data.dta":. use https://raw.githubusercontent.com/metodo-leam/stata/master/dta/agree_data.dta}{p_end}
 {p 4 4}{cmd:. agree Instrumental Manual}{p_end}
 {p 4 4}{cmd:. agree Instrumental Manual, ba pct line nst(Study name)}{p_end}
 {p 4 4}{cmd:. agree Instrumental Manual, pb ci list id(Especimen)}{p_end}
@@ -146,7 +146,7 @@ metodo.campus@gmail.com{break}
 Dom{c e'}nech JM. Passing-Bablok & Bland-Altman methods: User-written command agree for Stata [computer program].{break}
 V1.2.4. Bellaterra: Universitat Aut{c o'g}noma de Barcelona; 2022.{break}
 Available executing from Stata: {break}
-net install agree, from("https://raw.githubusercontent.com/metodo-leam/stata-leam/master/"){p_end}
+net install agree, from("https://raw.githubusercontent.com/metodo-leam/stata/master"){p_end}
 
 
 {marker references}{...}

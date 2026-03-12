@@ -1,16 +1,15 @@
 v 3
-d agree.  Agreement: Bland-Altman & Passing-Bablok methods
-d After installation, see help agree
+d dcreport.  Data Check - Incidence Report
+d After installation, see help dcreport
 d 
 d (c)JM. Domenech
 d Programmer: R. Sesma
 d Laboratori d'Estadística Aplicada i Modelització, Universitat Autònoma de Barcelona
 d 
 d Distribution-Date: 15dec2022
-d Version 1.2.4 (15dec2022)
+d Version 1.0.9 (15dec2022)
 d 
 d E-mail: metodo.campus@gmail.com
-f ado/agree.ado
-f sthlp/agree.sthlp
-f dlg/agree.dlg
-f dta/agree_data.dta
+f ado/dcreport.ado
+f sthlp/dcreport.sthlp
+f dlg/dcreport.dlg

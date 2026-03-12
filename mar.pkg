@@ -1,0 +1,18 @@
+v 3
+d mar.  Meta-Analysis: OR,RR,RD,IR,ID,B,MD,R combined
+d After installation, see help mar
+d 
+d (c)JM. Domenech
+d Programmer: R. Sesma
+d Laboratori d'Estadística Aplicada i Modelització, Universitat Autònoma de Barcelona
+d 
+d Distribution-Date: 15dec2022
+d Version 1.4.6 (15dec2022)
+d 
+d E-mail: metodo.campus@gmail.com
+f ado/mar.ado
+f sthlp/mar.sthlp
+f dlg/mar.dlg
+f dta/AngMio.dta
+f dta/Cancer_Utero.dta
+f dta/Comando_mar_para_Stata.zip.dta

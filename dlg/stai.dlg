@@ -1,0 +1,471 @@
+/*
+  stai.dlg
+
+*! VERSION 1.2.4  15sep2025
+
+*/
+
+VERSION 12.0
+SYNCHRONOUS_ONLY
+
+INCLUDE _std_medium
+DEFINE _dlght 345
+INCLUDE header
+HELP hlp1, view("help sta")
+RESET res1
+
+DEFINE _var_w 	120
+DEFINE _y_vars  120
+DEFINE _gb2   	260
+DEFINE _y_nst 	285
+DEFINE _y_xtr 	200
+DEFINE _x _lft
+DEFINE _y _top
+DEFINE _cx 100
+
+
+**# DIALOG main
+DIALOG main, label("stai - Association Measures") tabtitle("Main")
+BEGIN
+	GROUPBOX	gb_data	_lft	_top	220		110, label("Data type")
+	RADIO		rb_freq	_ilft	_ss		200		., label("Frequency data (unpaired)") first default(1)	/*
+										*/			onclickon(program type_freq) option(data(freq))
+	RADIO		rb_pt	_ilft	_ss		200		., label("Person-time data (unpaired)") middle 			/*
+										*/			onclickon(program type_pt) option(data(pt))
+	RADIO		rb_pair	_ilft	_ss		200		., label("Paired data") last onclickon(program type_paired) option(data(paired))
+
+	GROUPBOX	gb_st	_gb2	_top	150		110, label("Study type")
+	RADIO		rb_cs	+5		_ss		140		., label("Cross-Sectional") first default(1)	/*
+										*/			onclickon(program st_co) option(st(cs))
+	RADIO		rb_co	@		_ss		140		., label("Cohort") middle onclickon(program st_co) option(st(co))
+	RADIO		rb_ex	@		_ss		140		., label("Experimental") middle onclickon(program st_co) option(st(ex))
+	RADIO		rb_cc	@		_ss		140		., label("Case-Control") last onclickon(program st_cc) option(st(cc))
+
+	CHECKBOX    cb_tables   _lft	_xls	150		., default(1) label("Show 2x2 tables")
+	CHECKBOX    cb_rare  	_gb2   @	    120		., label("Rare disease") option(rare)
+	CHECKBOX    cb_det  	_lft    _ss		280		., default(0) onclickon(program detail_on) onclickoff(program detail_off) /*
+												*/		label("Display additional statistics") option(detail)
+	CHECKBOX    cb_relsym  	@    	@		280		., default(0) label("Relative simmetry") option(relatsymm)
+	
+	GROUPBOX	gb_xtr		_lft	175		400		80,
+	GROUPBOX	gb_xtr2		_lft	175		400		50,
+	EDIT		ed_pe		40		_ss		80		., numonly label("Proportion of exposed") option(pe)
+	TEXT  		tx_pe 		+85  	@ 		250  	., label("Proportion of exposed in the population")
+	TEXT  		tx_OR 		_ilft  	_ms		20  	., label("OR")
+	EDIT		ed_r		40		@		80		., numonly label("Proportion of exposed") option(r)
+	TEXT  		tx_r 		+85  	@ 		250  	., label("Proportion of cases in the population")
+	
+	GROUPBOX	gb_nst		_lft  	_y_nst	400    60, label("Name of the study")
+	EDIT		ed_nst		_ilft   _ms	 	380		., option(nst)
+END
+
+
+**# DIALOG data
+DIALOG data, tabtitle("Data")
+BEGIN
+	TEXT  		tx_u 	165  	25		90	., label("Unexposed") center
+	TEXT  		tx_e 	280  	@		90	., label("Exposed") center
+	FRAME 		fr1		_lft	50		400		35
+	TEXT  		tx_c 	75  	+7		70	., label("Events") right
+	EDIT		ed_b	165 	@		90	., numonly max(10000000)
+	EDIT		ed_a	280 	@		90	., numonly max(10000000)
+	FRAME 		fr2		_lft	84		400		35
+	TEXT  		tx_nc 	75  	+7		70	., label("NonEvents") right
+	EDIT		ed_d	165 	@		90	., numonly max(10000000)
+	EDIT		ed_c	280 	@		90	., numonly max(10000000)
+	FRAME 		fr3		150		50		120		69
+END
+
+
+**# DIALOG opt
+DIALOG opt, tabtitle("Options")
+BEGIN
+	INCLUDE _sp_level
+
+	GROUPBOX	gb_ci		_lft	 40		180		90, label("Confidence interval type")
+	RADIO		rb_wil		+5		_ss		170		., label("Wilson") first default(1) option(wilson)
+	RADIO		rb_ex		@		_ss		170		., label("Exact") middle option(exact)
+	RADIO		rb_wald		@		_ss		170		., label("Wald") last option(wald)
+
+	GROUPBOX	gb_assoc	220		 40		190		70, label("Association chi-square type")
+	RADIO		rb_pearson	+5		_ss		180		., label("Pearson") first default(1) option(pearson)
+	RADIO		rb_chi_mh	@		_ss		180		., label("Mantel-Haenszel") last option(mh)
+
+	GROUPBOX	gb_zero		_lft	140		180		110, label("Zero-cell correction")
+	RADIO		rb_n		+5		_ss		170		., label("None") first default(1) option(zero(n))
+	RADIO		rb_c		@		_ss		170		., label("Constant") middle option(zero(c))
+	RADIO		rb_p		@		_ss		170		., label("Proportional") middle option(zero(p))
+	RADIO		rb_r		@		_ss		170		., label("Reciprocal") last option(zero(r))
+
+	CHECKBOX    cb_nnt		_lft	270    300		., label("Compute Number Needed to Treat (NNT)") 	/*
+												*/		onclickon(program nnt_on) onclickoff(program nnt_off)
+	EDIT		ed_nnt		+20    	+20    	20		., numonly label("Code of good outcome") option(nnt) default(1)
+	TEXT  		tx_nnt   	+25     @ 		200		., label("Code of good outcome")
+END
+
+
+**# PROGRAM type_freq
+PROGRAM type_freq
+BEGIN
+	call program show_st
+	
+	call program show_ci_p_zero
+	
+	if (main.rb_cc) {
+		call program st_cc
+	}
+	else {
+		call program st_co
+	}
+	
+	call main.cb_det.show
+	call main.cb_det.setoff
+	call main.cb_relsym.hide
+END
+
+**# PROGRAM type_pt
+PROGRAM type_pt
+BEGIN
+	call program hide_st
+
+	call main.cb_det.show
+	call main.cb_det.setoff
+	call main.cb_relsym.hide
+
+	call program hide_rpe
+	call program hide_ci_p
+	call program hide_zero
+	call program hide_nnt
+		
+	call main.cb_rare.hide
+	
+	call data.tx_u.setlabel "Unexposed"
+	call data.tx_e.setlabel "Exposed"
+	call data.tx_c.setlabel "Cases"
+	call data.tx_nc.setlabel "Person-time"
+END
+
+**# PROGRAM type_paired
+PROGRAM type_paired
+BEGIN
+	call program hide_st
+
+	call main.cb_det.hide
+	call main.cb_det.setoff
+	call main.cb_relsym.show
+
+	call program hide_rpe
+	call program hide_ci_p
+	call program hide_zero
+	call program hide_nnt
+	
+	call main.cb_rare.hide
+
+	call data.tx_u.setlabel "X (-)"
+	call data.tx_e.setlabel "X (+)"
+	call data.tx_c.setlabel "Y (+)"
+	call data.tx_nc.setlabel "Y (-)"
+END
+
+
+**# PROGRAM st_co
+PROGRAM st_co
+BEGIN
+	if main.cb_det {
+		call program show_pe
+	}
+	else {
+		call program hide_rpe
+	}
+	
+	if (main.rb_ex | main.rb_co) {
+		call program show_nnt
+	}
+	else {
+		call program hide_nnt
+	}
+	
+	call main.cb_rare.hide
+	
+	call data.tx_c.setlabel "Events"
+	call data.tx_nc.setlabel "NonEvents"
+	if main.rb_co | main.rb_cs {
+		call data.tx_u.setlabel "Unexposed"
+		call data.tx_e.setlabel "Exposed"
+	}
+	if main.rb_ex {
+		call data.tx_u.setlabel "Treat. 0"
+		call data.tx_e.setlabel "Treat. 1"
+	}
+
+END
+
+**# PROGRAM st_cc
+PROGRAM st_cc
+BEGIN
+	call program show_rpe
+	
+	if main.cb_det {
+		call main.cb_rare.show
+	}
+	else {
+		call main.cb_rare.hide
+	}
+
+	call program hide_nnt
+	
+	call data.tx_u.setlabel "Unexposed"
+	call data.tx_e.setlabel "Exposed"
+	call data.tx_c.setlabel "Cases"
+	call data.tx_nc.setlabel "Controls"
+END
+
+**# PROGRAM detail_on
+PROGRAM detail_on
+BEGIN
+	if main.rb_freq {
+		if !main.rb_cc {
+			call main.cb_rare.hide
+			call program show_pe
+		}
+		else {
+			call main.cb_rare.show
+		}
+	}
+	if main.rb_pt {
+		call program show_pe
+	}	
+END
+
+**# PROGRAM detail_off
+PROGRAM detail_off
+BEGIN
+	call main.cb_rare.hide
+	if !(main.rb_freq & main.rb_cc) {
+		call program hide_rpe
+	}
+END
+
+**# PROGRAM show_hide_2x2
+PROGRAM show_hide_2x2
+BEGIN
+	if data.cb_str {
+		call data.tx_u.hide
+		call data.tx_e.hide
+		call data.fr1.hide
+		call data.tx_c.hide
+		call data.ed_b.hide
+		call data.ed_a.hide
+		call data.fr2.hide
+		call data.tx_nc.hide
+		call data.ed_d.hide
+		call data.ed_c.hide
+		call data.fr3.hide
+	}
+	else {
+		call data.tx_u.show
+		call data.tx_e.show
+		call data.fr1.show
+		call data.tx_c.show
+		call data.ed_b.show
+		call data.ed_a.show
+		call data.fr2.show
+		call data.tx_nc.show
+		call data.ed_d.show
+		call data.ed_c.show
+		call data.fr3.show
+	}
+END
+
+**# PROGRAM show_pe
+PROGRAM show_pe
+BEGIN
+	call main.gb_xtr.hide
+	call main.gb_xtr2.show
+	call main.ed_pe.show
+	call main.tx_pe.show
+	call main.tx_OR.hide
+	call main.ed_r.hide
+	call main.tx_r.hide
+END
+
+**# PROGRAM show_rpe
+PROGRAM show_rpe
+BEGIN
+	call main.gb_xtr.show
+	call main.gb_xtr2.hide
+	call main.ed_pe.show
+	call main.tx_pe.show
+	call main.tx_OR.show
+	call main.ed_r.show
+	call main.tx_r.show
+END
+
+**# PROGRAM hide_rpe
+PROGRAM hide_rpe
+BEGIN
+	call main.gb_xtr.hide
+	call main.gb_xtr2.hide
+	call main.ed_pe.hide
+	call main.tx_pe.hide
+	call main.tx_OR.hide
+	call main.ed_r.hide
+	call main.tx_r.hide
+END
+
+**# PROGRAM show_ci_p_zero
+PROGRAM show_ci_p_zero
+BEGIN
+	call opt.gb_ci.show
+	call opt.rb_wil.show
+	call opt.rb_wil.seton
+	call opt.rb_ex.show
+	call opt.rb_wald.show
+	
+	call opt.gb_assoc.show
+	call opt.rb_pearson.show
+	call opt.rb_pearson.seton
+	call opt.rb_chi_mh.show
+	
+	call opt.gb_zero.show
+	call opt.rb_n.show
+	call opt.rb_n.seton
+	call opt.rb_c.show
+	call opt.rb_p.show
+	call opt.rb_r.show
+END
+
+**# PROGRAM hide_zero
+PROGRAM hide_zero
+BEGIN
+	call opt.gb_zero.hide
+	call opt.rb_n.hide
+	call opt.rb_n.hide
+	call opt.rb_c.hide
+	call opt.rb_p.hide
+	call opt.rb_r.hide
+END
+
+**# PROGRAM hide_ci_p
+PROGRAM hide_ci_p
+BEGIN
+	call opt.gb_ci.hide
+	call opt.rb_wil.hide
+	call opt.rb_ex.hide
+	call opt.rb_wald.hide
+	
+	call opt.gb_assoc.hide
+	call opt.rb_pearson.hide
+	call opt.rb_chi_mh.hide
+END
+
+**# PROGRAM show_st
+PROGRAM show_st
+BEGIN
+	call main.gb_st.show
+	call main.rb_cs.show
+	call main.rb_co.show
+	call main.rb_ex.show
+	call main.rb_cc.show
+END
+
+**# PROGRAM hide_st
+PROGRAM hide_st
+BEGIN
+	call main.gb_st.hide
+	call main.rb_cs.hide
+	call main.rb_co.hide
+	call main.rb_ex.hide
+	call main.rb_cc.hide
+END
+
+**# PROGRAM hide_nnt
+PROGRAM hide_nnt
+BEGIN
+	call opt.cb_nnt.hide
+	call opt.ed_nnt.hide
+	call opt.tx_nnt.hide
+END
+
+**# PROGRAM show_nnt
+PROGRAM show_nnt
+BEGIN
+	call opt.cb_nnt.show
+	call opt.ed_nnt.show
+	call opt.tx_nnt.show
+END
+
+**# PROGRAM nnt_off
+PROGRAM nnt_off
+BEGIN
+	call opt.tx_nnt.disable
+	call opt.ed_nnt.disable
+END
+
+**# PROGRAM nnt_on
+PROGRAM nnt_on
+BEGIN
+	call opt.tx_nnt.enable
+	call opt.ed_nnt.enable
+END
+
+
+**# PROGRAM command
+PROGRAM command
+BEGIN
+	put "stai "
+	require data.ed_a data.ed_b data.ed_c data.ed_d
+	put data.ed_a " " data.ed_b " " data.ed_c " " data.ed_d
+	
+	beginoptions
+		option radio(main rb_freq rb_pt rb_pair)		//data
+		if main.rb_freq | main.rb_pt {
+			if main.rb_freq {
+				option radio(main rb_cs rb_co rb_ex rb_cc)	//st
+			}
+
+			option main.cb_det		//detail
+			if main.cb_det & main.rb_freq & main.rb_cc {
+				option main.cb_rare					//rare (cc only)
+			}
+						
+			if main.rb_freq {
+				if !opt.rb_wil {
+					option radio(opt rb_wil rb_ex rb_wald)				//wilson|exact|wald CI
+				}
+				if !opt.rb_pearson {
+					option radio(opt rb_pearson rb_chi_mh)				//pearson|mh chi
+				}
+				
+				if opt.cb_nnt {
+					optionarg opt.ed_nnt			//nnt
+				}
+
+				optionarg main.ed_pe		//pe
+				optionarg main.ed_r			//r
+				
+				if !opt.rb_n {
+					option radio(opt rb_c rb_p rb_r)					//zero
+				}
+			}
+			if main.rb_pt {
+				optionarg main.ed_pe		//pe
+			}
+
+		}
+		
+		if main.rb_pair {
+			option main.cb_relsym	//relatsym (paired data only)
+		}
+
+		if !main.cb_tables {
+			put " notables"			//notables
+		}
+
+		INCLUDE _level_opt_pr		//level
+
+		optionarg main.ed_nst		//nst
+	endoptions
+
+END
+

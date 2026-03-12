@@ -1,0 +1,200 @@
+/*
+  confound.dlg
+
+*! VERSION 1.2.1 09dec2024
+
+*/
+
+VERSION 12.0
+
+INCLUDE _std_medium
+DEFINE _dlght 480
+INCLUDE header
+HELP hlp1, view("help confound")
+RESET res1
+
+**# DIALOG main
+DIALOG main, tabtitle("Model") title("confound - Modelling confounding")
+BEGIN
+    DEFINE _x _xsetbu
+    DEFINE _y 35
+    INCLUDE _bu_stset
+	TEXT 		tx_type	_lft	_top	_vnwd	., label("Regression type:")
+    TEXT 		tx_dv 	290		@	    _vnwd	., label("Dependent variable:")
+	COMBOBOX	co_type	_lft	_ss	    220		., dropdownlist contents(type_contents) values(type_values) onselchange(program change_type)
+	VARNAME 	vn_dv	290 	@		_vnwd	., label("Dependent variable")
+	TEXT 		tx_exp 	_lft	_ms		_vnwd	.,	label("Exposition variable:")
+    TEXT 		tx_iv	_vlx	@		160		.,	label("Independent variables:")
+    VARNAME 	vn_exp	_lft 	_ss		_vnwd	.,	fv label("Exposition variable")
+	VARLIST 	vl_iv	_vlx	@		_vlwd	.,	fv label("Independent variables")
+
+	GROUPBOX 	gb_cr	_lft	_ls		_iwd	 _ht4,  label("Competing-risks events")
+	TEXT 		tx_crvar _ilft	_ss		_cwd3	.,	label("Variable:")
+	DEFINE holdy @y
+	VARNAME  	vn_crvar @		_ss		_vnwd	.,	label("Variable for competing-risks events")
+	TEXT 		tx_crnum _lft2	holdy	_cwd3	.,	label("Values:")
+	EDIT 		ed_crnum @		_ss		_vnwd	.,	label("Values")
+
+	GROUPBOX	gb_opt	_lft  	_xls	_iwd    230, label("Options")
+    EDIT		ed_ch	_ilft  	_ms	 	50		., numonly option(change) default(10)
+	TEXT		tx_ch	+60	    @		70		., label("Change (%)")
+    DEFINE _x 230
+	DEFINE _y 210
+	DEFINE _cx 100
+	INCLUDE _sp_level
+	CHECKBOX	cb_min	_ilft	_ls		_iwd  	., label("Minimum model as reference") default(0)
+    TEXT		tx_val	_ilft	_ms		370		., label("List of values for continuous interactions:")
+    EDIT		ed_val	_ilft  	_ms	 	370	    ., option(values) default("p5 p50 p95")
+    TEXT		tx_fix	_ilft	_ls		100		., label("Fixed variables:")
+	VARLIST 	vl_fix	+110	@		_vlwd   ., label("Fixed variables") option(fixed)
+
+	TEXT 		tx_usin	_ilft	_ms		370		., label("Stata Data file to store results (working directory is used by default):")
+	FILE		fl_usin	_ilft	_ss		370		., label("Browse...") default("confound_results.dta")/*
+					*/								dialogtitle("Save Confound Results Stata Data File") /*
+					*/								filter("Stata Data (*.dta)|*.dta") save option(using)
+	CHECKBOX	cb_repl	_ilft	_ss		370	  	., label("Replace dataset if it already exists") default(1)
+
+	GROUPBOX	gb_nst	_lft  	_ls		_iwd    60, label("Name of the study")
+	EDIT		ed_nst	_ilft   _ss	 	370		., option(nst)
+END
+
+INCLUDE ifin
+
+**# DIALOG weights
+DIALOG weights, tabtitle(resource "Weights")
+BEGIN
+  TEXT     tx_wgttyp _lft      _top      _cwd1     ., label("Weight type:")
+  BUTTON   bu_help   _xsetbu   -2        _setbuwd  ., label("Help weights")	onpush(view help weights##|_new)
+
+  RADIO    rb_none   _lft      +22       _iwd      ., first label("None") onclickon(program wgt_off) option(NONE)
+  RADIO    rb_pw     _lft      _ss       _iwd      ., last label("Sampling weights") onclickon(program wgt_on) option(pweight)
+
+  TEXT     tx_wgt    _lft      _ls       _iwd      ., label("Weight:")
+  VARLIST  vl_wgt    @         _ss       _iwd      ., numeric label("Weight")
+END
+
+
+LIST type_contents
+	BEGIN
+		Linear
+		Logistic
+		Cox (Proportional hazards  model)
+		Fine-Gray (Competing risks)
+	END
+
+LIST type_values
+	BEGIN
+		linear
+		logistic
+		cox
+		finegray
+	END
+
+**# PROGRAM wgt_on
+PROGRAM wgt_on
+BEGIN
+	call weights.tx_wgt.enable
+	call weights.vl_wgt.enable
+	call weights.tx_wgt.setlabel "Sampling weight:"
+END
+
+**# PROGRAM wgt_off
+PROGRAM wgt_off
+BEGIN
+	call weights.tx_wgt.disable
+	call weights.vl_wgt.disable
+	call weights.tx_wgt.setlabel "Weight:"
+END
+
+**# PROGRAM change_type
+PROGRAM change_type
+BEGIN
+	//Show/hide and move controls
+	if main.co_type.iseq("cox") | main.co_type.iseq("finegray") {
+		call main.tx_dv.hide
+		call main.vn_dv.hide
+		call main.bu_stset.show
+
+		call weights.rb_none.seton
+		call weights.rb_pw.disable
+
+		if main.co_type.iseq("finegray") {
+			call main.gb_cr.show
+			call main.tx_crvar.show
+			call main.vn_crvar.show
+			call main.tx_crnum.show
+			call main.ed_crnum.show
+		}
+		if main.co_type.iseq("cox") {
+			call main.gb_cr.hide
+			call main.tx_crvar.hide
+			call main.vn_crvar.hide
+			call main.tx_crnum.hide
+			call main.ed_crnum.hide
+		}
+	}
+	else {
+		call main.tx_dv.show
+		call main.vn_dv.show
+		call main.bu_stset.hide
+
+		call weights.rb_pw.enable
+		
+		call main.gb_cr.hide
+		call main.tx_crvar.hide
+		call main.vn_crvar.hide
+		call main.tx_crnum.hide
+		call main.ed_crnum.hide
+	}
+END
+
+**# PROGRAM command
+PROGRAM command
+BEGIN
+	put "confound "
+	if (main.co_type.iseq("linear") | main.co_type.iseq("logistic")) {
+		require main.vn_dv
+		varlist main.vn_dv
+	}
+	require main.vn_exp main.vl_iv
+	varlist main.vn_exp main.vl_iv
+	put " " /program ifin_output
+	
+	//Weights
+	if !weights.rb_none {
+		require weights.vl_wgt
+		put " [pweight= "
+		put weights.vl_wgt
+		put "] "
+	}
+	
+	beginoptions
+		put " " main.co_type
+		if main.co_type.iseq("finegray") {
+			require main.vn_crvar
+			put " compete(" main.vn_crvar
+			if (main.ed_crnum.isneq("")) {
+				put "==" main.ed_crnum
+			}
+			put ")"
+		}
+		if !main.ed_ch.isdefault() {
+			optionarg main.ed_ch
+		}
+		if main.cb_min {
+			put " minimum"
+		}
+		if !main.ed_val.isdefault() {
+			optionarg main.ed_val
+		}
+		optionarg main.vl_fix
+		INCLUDE _level_main_pr
+		if !main.fl_usin.isdefault() {
+			optionarg main.fl_usin
+		}
+		if !main.cb_repl {
+			put " noreplace"
+		}
+		optionarg main.ed_nst
+	endoptions
+END

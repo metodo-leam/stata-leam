@@ -1,0 +1,16 @@
+v 3
+d intcon.  Internal Consistency
+d After installation, see help intcon
+d 
+d (c)JM. Domenech, JB. Navarro
+d Programmer: R. Sesma
+d Laboratori d'Estadística Aplicada i Modelització, Universitat Autònoma de Barcelona
+d 
+d Distribution-Date: 15dec2022
+d Version 1.0.3 (15dec2022)
+d 
+d E-mail: metodo.campus@gmail.com
+f ado/intcon.ado
+f sthlp/intcon.sthlp
+f dlg/intcon.dlg
+f dta/intcon.dta

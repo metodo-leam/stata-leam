@@ -1,0 +1,184 @@
+{smcl}
+{* *! version 1.2.1 09dec2024}{...}
+{viewerdialog confound "dialog confound"}{...}
+{vieweralsosee "[R] regress" "help regress"}{...}
+{vieweralsosee "[R] logit" "help logit"}{...}
+{vieweralsosee "[R] stcox" "help stcox"}{...}
+{vieweralsosee "[ST] stcrreg" "help stcrreg"}{...}
+{vieweralsosee "[R] stset" "help stset"}{...}
+{vieweralsosee "" "--"}{...}
+{vieweralsosee "[P] _rmcoll" "help _rmcoll"}{...}
+{viewerjumpto "Syntax" "confound##syntax"}{...}
+{viewerjumpto "Description" "confound##description"}{...}
+{viewerjumpto "Examples" "confound##examples"}{...}
+{viewerjumpto "Version" "confound##version"}{...}
+{viewerjumpto "Authors" "confound##authors"}{...}
+{viewerjumpto "References" "confound##refrences"}{...}
+{title:Title}
+
+{phang}
+{bf:confound} {hline 2} Modelling confounding in Linear, Logistic,
+Cox proportional hazards and Competing-risk (Fine-Gray) regression
+
+
+{marker syntax}{...}
+{title:Syntax}
+
+{phang}Syntax for {bf:Linear} or {bf:Logistic} regression
+
+{p 8 12 2}
+{cmd:confound} {depvar} {it:{help varname:exposition}} {indepvars} {ifin} {weight}
+{cmd:, linear | logistic} [{it:{help confound##options:options}}]
+
+{phang}Syntax for {bf:Cox proportional hazards} regression
+
+{p 8 12 2}
+{cmd:confound} {it:{help varname:exposition}} {indepvars} {ifin}{cmd:, cox} 
+[{it:{help confound##options:options}}]
+
+{phang}Syntax for {bf:Competing-risk} ({help stcrreg##FG1999:Fine and Gray} method) regression
+
+{p 8 12 2}
+{cmd:confound} {it:{help varname:exposition}} {indepvars} {ifin}{cmd:, finegray} 
+{cmd:compete(}{it:crvar}[{cmd:==}{it:{help numlist}}]{cmd:)} 
+[{it:{help confound##options:options}}]
+
+{marker options}{...}
+{synoptset 20}{...}
+{synopthdr}
+{synoptline}
+{synopt :{opt lin:ear}}Linear regression; see {help regress}{p_end}
+{synopt :{opt log:istic}}Logistic regression; see {help logit}{p_end}
+{synopt :{opt cox}}Cox regression*; see {help stcox}{p_end}
+{synopt :{opt fin:egray}}Competing-risk regression*; see {help stcrreg}{p_end}
+{synopt :{opt compete}}{bf:required} for {cmd:finegray} and specifies the events that are associated 
+with failure due to competing risks:{break}
+If {opt compete(crvar)} is specified, {it:crvar} is interpreted as an 
+indicator variable; any nonzero, nonmissing values are interpreted as 
+representing competing events.{break}
+If {opt compete(crvar==numlist)} is specified, records with {it:crvar} taking
+on any of the values in {it:numlist} are assumed to be competing
+events.{break}{p_end}
+{synopt :{opth ch:ange(real)}}percentage of change that is considered important; by default {cmd:change(10)}{p_end}
+{synopt :{opt min:imum}}use minimum model as reference{p_end}
+{synopt :{opth val:ues(values_list)}}list of values for continuous interactions; by default {cmd:values(p5 p50 p95)}{break}
+Literal values or percentiles p1 p5 p10 p25 p50 p75 p90 p96 p99 may be used{p_end}
+{synopt :{opt l:evel(#)}}confidence level (%); by default {cmd:level(95)}{p_end}
+{synopt :{opth fixed(varlist)}}fixed variables{p_end}
+{synopt :{opth using(filename)}}{it:{help filename}} to store the results dataset; by default a dataset named
+{it:confound_results} is saved in the current (working) directory{p_end}
+{synopt :{opt noreplace}}if {it:{help filename}} exists, do not replace; by default existing datasets are replaced{p_end}
+{synopt :{opt nst(string)}}name of the study (label){p_end}
+{synoptline}
+INCLUDE help fvvarlist
+{p 4 4 2}*You must {cmd:stset} your data before using {cmd:cox} or {cmd:finegray}; see {manhelp stset ST}.{p_end}
+{p 4 4 2}{bf:pweight} is allowed for {opt linear} and {opt logistic} regression; see {help weight:weight}.{break}
+You may use {cmd:stset} to weight your data before using {cmd:cox} or {cmd:finegray}; see {manhelp stset ST}.{p_end}
+
+
+{marker description}{...}
+{title:Description}
+
+{p 4 4}
+This command helps the assessment of confounding for Linear, Logistic, Cox and Competing-risk regression according to
+the rules proposed by Kleinbaum, Kupper, Nizam & Muller (2008, pp. 198-202).
+
+{p 4 4}
+For logistic regression, the Hosmer-Lemeshow goodness-of-fit test (variable pfitHL) is computed using 10 quantiles to group
+data: {cmd:estat gof, group(10)}.
+
+{p 4 4}
+The results are stored in a new dataset named by default {it:confound_results} and saved in the current (working)
+directory. Existing datasets are replaced by default.
+
+{p 4 4}
+You can click {dialog confound:here} to pop up a {dialog confound:dialog} or type {inp: db confound}.
+
+{p 4 4}
+Execute {cmd: net install confound, from("https://raw.githubusercontent.com/metodo-leam/stata/master")} for install.
+
+{p 4 4}
+This command uses the {help regress}, {help logit}, {help logistic estat gof}, {help stcox}, {help stcrreg} 
+and {help _rmcoll} Stata commands.
+
+
+{marker examples}{...}
+{title:Examples}
+
+{p 4 4}
+The zip file available for download on {browse "https://raw.githubusercontent.com/metodo-leam/stata/master/dta/Ejemplo_confound.zip"} contains a pdf file with an
+example of use of the {cmd:confound} command (in spanish). The zip file also contains example data. If
+the direct download fails, copy the download link (https://raw.githubusercontent.com/metodo-leam/stata/master/dta/Ejemplo_confound.zip) and paste in the 
+address bar of your web browser.
+
+Linear regression
+{p 4 4}{stata "use https://raw.githubusercontent.com/metodo-leam/stata/master/dta/confound_linear.dta":. use https://raw.githubusercontent.com/metodo-leam/stata/master/dta/confound_linear.dta}{p_end}
+{p 4 4}{cmd:. confound y x1 z1 z2 z3 i.z4, linear}{p_end}
+{p 4 4}{cmd:. confound y i.x2 z1 z3, linear}{p_end}
+{p 4 4}{cmd:. confound y x1 z1 z2 z3 c.x1#c.z2, linear values(p5 p50 p95 60 75) using(results_lr_cont.dta)}{p_end}
+{p 4 4}{cmd:. confound y x1 z2 z3 i.z4r c.x1#i.z4r, linear}{p_end}
+
+Logistic regression
+{p 4 4}{stata "use https://raw.githubusercontent.com/metodo-leam/stata/master/dta/confound_logistic.dta":. use https://raw.githubusercontent.com/metodo-leam/stata/master/dta/confound_logistic.dta}{p_end}
+{p 4 4}{cmd:. confound y x1 z1 z2 z3 c.x1#c.z3, logistic values(p5 p50 p95 90 104)}{p_end}
+
+Cox regression
+{p 4 4}{stata "use https://raw.githubusercontent.com/metodo-leam/stata/master/dta/confound_cox.dta":. use https://raw.githubusercontent.com/metodo-leam/stata/master/dta/confound_cox.dta}{p_end}
+{p 4 4}{cmd:. stset tr, failure(estado==1)}{p_end}
+{p 4 4}{cmd:. confound x1 z1 z2 z3 i.z4 c.x1#c.z2, cox}{p_end}
+
+Competing-risk regression
+{p 4 4}{stata "use https://raw.githubusercontent.com/metodo-leam/stata/master/dta/confound_finegray.dta":. use https://raw.githubusercontent.com/metodo-leam/stata/master/dta/confound_finegray.dta}{p_end}
+{p 4 4}{cmd:. stset tr, failure(estado==1)}{p_end}
+{p 4 4}{cmd:. confound x1 z1 z2 z3 i.z4, finegray compete(estado==2)}{p_end}
+
+{marker version}{...}
+{title:Version}
+
+{p 4}
+Version 1.2.1 {hline 2} 09 December 2024
+
+
+{marker authors}{...}
+{title:Authors}
+
+{p 4 4 2}
+JM.Dom{c e'}nech & JB.Navarro{break}
+Programmer: R.Sesma{break}
+Laboratori d'Estad{c i'}stica Aplicada{break}
+Universitat Aut{c o'g}noma de Barcelona{break}
+metodo.campus@gmail.com{p_end}
+
+
+{title:Vancouver reference}
+
+{p 4 6 2}
+Dom{c e'}nech JM, Navarro JB. Find the best subset for Linear, Logistic and Cox Regression:{break}
+User-written command confound for Stata [computer program].{break}
+V1.2.1. Bellaterra: Universitat Aut{c o'g}noma de Barcelona; 2024.{break}
+Available executing from Stata: {break}
+net install confound, from("https://raw.githubusercontent.com/metodo-leam/stata/master"){p_end}
+
+
+{marker references}{...}
+{title:References}
+
+{p 0 2}
+Dom{c e'}nech JM, Navarro JB. Regresi{c o'}n m{c u'}ltiple con predictores categ{c o'}ricos y cuantitativos. 7{c 170} ed. Barcelona: Signo; 2014.{p_end}
+
+{p 0 2}
+Dom{c e'}nech JM, Navarro JB. Regresi{c o'}n log{c i'}stica binaria, multinomial, de Poisson y binomial negativa. 7{c 170} ed. Barcelona: Signo; 2014.{p_end}
+
+{p 0 2}
+Dom{c e'}nech JM, Navarro JB. An{c a'}lisis de la supervivencia y modelo de riesgos proporcionales de Cox. 7{c 170} ed. Barcelona: Signo; 2014.{p_end}
+
+{p 0 2}
+Kleinbaum DG, Kupper LL, Morgenstern H. Epidemiologic research.
+Principles and quantitative methods. New York: Van Nostrand Reinhold Company; 1983.{p_end}
+
+{p 0 2}
+Kleinbaum DG, Kupper LL, Nizam A, Muller K. Applied Regression Analysis and
+other Multivariable Methods. (4{c 170} ed.). Belmont (CA): Thomson Learning, Inc; 2008.{p_end}
+
+{p 0 2}
+Maldonado G, Greenland S. Simulation study of confounder-selection strategies. Am J Epidemiol. 1993;138:923-36.{p_end}

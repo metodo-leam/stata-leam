@@ -1,0 +1,15 @@
+v 3
+d dc.  Data Check
+d After installation, see help dc
+d 
+d (c)JM. Domenech
+d Programmer: R. Sesma
+d Laboratori d'Estadística Aplicada i Modelització, Universitat Autònoma de Barcelona
+d 
+d Distribution-Date: 28oct2025
+d Version 1.1.2 (28oct2025)
+d 
+d E-mail: metodo.campus@gmail.com
+f ado/dc.ado
+f sthlp/dc.sthlp
+f dlg/dc.dlg
