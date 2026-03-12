@@ -6,7 +6,6 @@ d This repository provides user-written commands for use with Stata.
 p agree Agreement: Bland-Altman & Passing-Bablok methods
 p allsets All Possible Subsets: Linear, Logistic, Cox proportional hazards and Competing-risk (Fine-Gray) regression
 p chisqi Goodness of fit Chi-squared test
-p ci2p This command is obsolete. Install new command sta
 p cir Confidence Intervals for Pearson and Spearman Correlation
 p cohenkap Kappa & Weighted kappa
 p confound Modelling confounding in Linear, Logistic, Cox proportional hazards and Competing-risk (Fine-Gray) regression
